@@ -28,13 +28,16 @@ function isGoodChoice(a) {
       return false;
     }
   }
+  if (a.a11 * a.a22 == a.a12 * a.a21) {
+    return false;  // Linearly dependent set of equations.
+  }
   return true;
 }
 
 $(document).ready(() => {
   var x = getRandomInt(-10, 11);
   var y = getRandomInt(-10, 11);
-  var a = {'a11': 0, 'a12': 0, 'a21': 0, 'a22': 0};
+  var a = {a11: 0, a12: 0, a21: 0, a22: 0};
   do {
     for (const [key, value] of Object.entries(a)) {
       a[key] = getRandomInt(-7, 8);
