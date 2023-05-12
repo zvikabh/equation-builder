@@ -1,5 +1,8 @@
 'use strict';
 
+var a = {a11: 0, a12: 0, a21: 0, a22: 0};
+var x, y;
+
 function getRandomInt(min, max) {
   // The maximum is exclusive and the minimum is inclusive.
   return Math.floor(Math.random() * (max - min) + min);
@@ -22,7 +25,7 @@ function placeCoefficient(coef, id, dontWriteOnes) {
   }
 }
 
-function isGoodChoice(a) {
+function isGoodChoice() {
   for (const [key, value] of Object.entries(a)) {
     if (value == 0) {
       return false;
@@ -34,15 +37,24 @@ function isGoodChoice(a) {
   return true;
 }
 
+function check() {
+  var userX = parseInt($('#x-input').val());
+  var userY = parseInt($('#y-input').val());
+  if (x == userX && y == userY) {
+    $('#win').show();
+  } else {
+    $('#loss').show();
+  }
+}
+
 $(document).ready(() => {
-  var x = getRandomInt(-10, 11);
-  var y = getRandomInt(-10, 11);
-  var a = {a11: 0, a12: 0, a21: 0, a22: 0};
+  x = getRandomInt(-10, 11);
+  y = getRandomInt(-10, 11);
   do {
     for (const [key, value] of Object.entries(a)) {
       a[key] = getRandomInt(-7, 8);
     }
-  } while (!isGoodChoice(a));
+  } while (!isGoodChoice());
   var b1 = a.a11*x + a.a12*y;
   var b2 = a.a21*x + a.a22*y;
   for (const [key, value] of Object.entries(a)) {
